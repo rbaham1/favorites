@@ -25,7 +25,6 @@ class ClearFavoritesButton extends StatelessWidget {
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.transparent,
-                    //foregroundColor: Colors.white,
                   ),
                   child: Text("Cancel")
                 ),
@@ -46,7 +45,7 @@ class ClearFavoritesButton extends StatelessWidget {
         );
       }, 
       style: ElevatedButton.styleFrom(
-        backgroundColor: favoritesProvider.isDarkMode ? Colors.transparent : Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: Colors.red,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
