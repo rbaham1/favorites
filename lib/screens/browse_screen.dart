@@ -40,7 +40,10 @@ class _BrowseScreenState extends State<BrowseScreen> {
                 segments: [
                   ButtonSegment(
                     value: ContentCategory.cities,
-                    label: Text("Cities")
+                    label: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      child: Text("Cities"),
+                    )
                   ),
                   ButtonSegment(
                     value: ContentCategory.hobbies,
@@ -57,7 +60,17 @@ class _BrowseScreenState extends State<BrowseScreen> {
                     selectedCategory = selection.first;
                   });
                 },
+                showSelectedIcon: false,
+                style: ButtonStyle(
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(12),
+                    ),
+                  ),
+                ),
               ),
+
+              SizedBox(height: 16,),
 
               TextField(
                 decoration: InputDecoration(
