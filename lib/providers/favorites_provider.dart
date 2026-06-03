@@ -76,6 +76,7 @@ class FavoritesProvider extends ChangeNotifier {
       book.isFavorite = false;
     }
 
+    saveFavorites();
     notifyListeners();
   }
 
