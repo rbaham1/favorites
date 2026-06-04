@@ -128,7 +128,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                         return ListView.builder(
                           itemCount: searchActive ? 
                             favoritesProvider.books.where((book) => (book.bookTitle.toLowerCase().contains(searchText) || 
-                                book.bookAuthor.toLowerCase().contains(searchText))).length: 
+                              book.bookAuthor.toLowerCase().contains(searchText))).length : 
                             favoritesProvider.books.length,
                           itemBuilder: (context, index) {
                             final book = searchActive ? 
