@@ -21,6 +21,8 @@ class BrowseScreen extends StatefulWidget {
 class _BrowseScreenState extends State<BrowseScreen> {
   ContentCategory selectedCategory = ContentCategory.cities;
   String searchText = "";
+  bool searchActive = false;
+  final fieldText = TextEditingController();
 
   String get searchHint => "Search ${selectedCategory.name}";
 
@@ -58,6 +60,9 @@ class _BrowseScreenState extends State<BrowseScreen> {
                 onSelectionChanged: (selection) {
                   setState(() {
                     selectedCategory = selection.first;
+                    searchText = "";
+                    fieldText.clear();
+                    FocusScope.of(context).unfocus();
                   });
                 },
                 showSelectedIcon: false,
@@ -81,44 +86,61 @@ class _BrowseScreenState extends State<BrowseScreen> {
                   )
                 ),
                 onChanged: (value) {
-                  searchText = value;
+                  setState(() {
+                    searchText = value.toLowerCase();
+                    (searchText != "") ? searchActive = true : searchActive = false;
+                  });
                 },
+                controller: fieldText,
               ),
 
               SizedBox(height: 16,),
 
               Expanded(
-                child: 
-                Builder(
+                child: Builder(
                   builder: (context) {
                     switch(selectedCategory) {
                       case ContentCategory.cities:
                         return ListView.builder(
-                          itemCount: favoritesProvider.cities.length,
+                          itemCount: searchActive ? 
+                            favoritesProvider.cities.where((city) => city.cityName.toLowerCase().contains(searchText)).length : 
+                            favoritesProvider.cities.length,
                           itemBuilder: (context, index) {
-                            final city = favoritesProvider.cities[index];
+                            final city = searchActive ? 
+                              favoritesProvider.cities.where((city) => city.cityName.toLowerCase().contains(searchText)).toList()[index] : 
+                              favoritesProvider.cities[index];
                             return CityCard(city: city);
                           }
                         );
                       case ContentCategory.hobbies:
                         return ListView.builder(
-                          itemCount: favoritesProvider.hobbies.length,
+                          itemCount: searchActive ? 
+                            favoritesProvider.hobbies.where((hobby) => hobby.hobbyName.toLowerCase().contains(searchText)).length : 
+                            favoritesProvider.hobbies.length,
                           itemBuilder: (context, index) {
-                            final hobby = favoritesProvider.hobbies[index];
+                            final hobby = searchActive ? 
+                              favoritesProvider.hobbies.where((hobby) => hobby.hobbyName.toLowerCase().contains(searchText)).toList()[index] : 
+                              favoritesProvider.hobbies[index];
                             return HobbyCard(hobby: hobby);
                           }
                         );
                       case ContentCategory.books:
                         return ListView.builder(
-                          itemCount: favoritesProvider.books.length,
+                          itemCount: searchActive ? 
+                            favoritesProvider.books.where((book) => (book.bookTitle.toLowerCase().contains(searchText) || 
+                                book.bookAuthor.toLowerCase().contains(searchText))).length: 
+                            favoritesProvider.books.length,
                           itemBuilder: (context, index) {
-                            final book = favoritesProvider.books[index];
+                            final book = searchActive ? 
+                              (favoritesProvider.books.where((book) => (book.bookTitle.toLowerCase().contains(searchText) || 
+                                book.bookAuthor.toLowerCase().contains(searchText)))).toList()[index] : 
+                              favoritesProvider.books[index];
                             return BookCard(book: book);
                           }
                         );
                     }
-                  })
-                // 
+                  }
+                )
               )
             ],
           )
