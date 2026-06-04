@@ -1,12 +1,45 @@
 import 'package:flutter/material.dart';
+import '../widgets/favorites_card.dart';
 
-class FavoritesScreen extends StatelessWidget {
+class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
 
   @override
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
+}
+
+class _FavoritesScreenState extends State<FavoritesScreen> {
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Favorites Screen")
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Text("Favorites",
+              textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold
+                ),
+              ),
+
+              SizedBox(height: 24,),
+
+              Expanded(
+                child: ListView(
+                  children: [
+                    FavoritesCard(category: ContentCategory.cities, title: "Cities",),
+                    FavoritesCard(category: ContentCategory.hobbies, title: "Hobbies",),
+                    FavoritesCard(category: ContentCategory.books, title: "Books"),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ) 
+      )
     );
   }
 }

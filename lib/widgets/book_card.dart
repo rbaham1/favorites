@@ -33,7 +33,7 @@ class BookCard extends StatelessWidget {
               )
             ],
           ),
-          contentPadding: EdgeInsets.all(12),
+          contentPadding: EdgeInsets.only(left: 12, right: 12),
         ),
     );
   }

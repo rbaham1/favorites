@@ -10,8 +10,8 @@ class CityCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
-      margin: EdgeInsets.only(bottom: 8),
+      height: 120,
+      margin: EdgeInsets.only(top: 4, bottom: 4),
       child: Stack(
         children: [
           ClipRRect(
