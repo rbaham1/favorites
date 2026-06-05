@@ -33,6 +33,7 @@ class CityCard extends StatelessWidget {
                     fontSize: 18
                   )
                 ),
+                // Add favorites button
                 IconButton(
                   onPressed: () {
                     context.read<FavoritesProvider>().

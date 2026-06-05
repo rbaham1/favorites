@@ -13,10 +13,11 @@ class BookCard extends StatelessWidget {
       height: 70,
       margin: EdgeInsets.all(0),
       child: ListTile(
+        // Display book title and display author underneath in subtitle format
         title: Text(book.bookTitle),
         subtitle: Text(book.bookAuthor),
+        // Add favorite button
         trailing: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(

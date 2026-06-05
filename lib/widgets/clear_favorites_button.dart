@@ -15,10 +15,12 @@ class ClearFavoritesButton extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) {
+            // Show confirmation message to confirm clearing favorites
             return AlertDialog(
               title: Text("Clear Favorites?"),
               content: Text("This action cannot be undone."),
               actions: [
+                // Add a cancel button that closes the confirmation message only
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -28,6 +30,7 @@ class ClearFavoritesButton extends StatelessWidget {
                   ),
                   child: Text("Cancel")
                 ),
+                // Add a confirm button that closes the confirmation message and clears the favorites
                 TextButton(
                   onPressed: () {
                     favoritesProvider.clearFavorites();
@@ -44,6 +47,8 @@ class ClearFavoritesButton extends StatelessWidget {
           }
         );
       }, 
+      // Style the button to have a transparent background with a red border and red text
+      // The transparent background allows the button to seamlessly switch between dark and light modes
       style: ElevatedButton.styleFrom(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         foregroundColor: Colors.red,

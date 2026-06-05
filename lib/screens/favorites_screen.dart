@@ -17,6 +17,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           padding: EdgeInsets.all(16),
           child: Column(
             children: [
+              // Generate Favorites title
               Text("Favorites",
               textAlign: TextAlign.center,
                 style: TextStyle(
@@ -27,6 +28,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
               SizedBox(height: 24,),
 
+              // Generate each category's favorites card
               Expanded(
                 child: ListView(
                   children: [

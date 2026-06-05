@@ -8,10 +8,13 @@ class FavoritesProvider extends ChangeNotifier {
   final books = sampleBooks;
   bool isDarkMode = false;
 
+  // Constructor that defines the provider upon initialization
+  // This will run loadFavorites() immediately upon starting the app
   FavoritesProvider() {
     loadFavorites();
   }
 
+  // Function to save any changes to favorites or settings
   Future<void> saveFavorites() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -39,6 +42,7 @@ class FavoritesProvider extends ChangeNotifier {
       await prefs.setBool("darkMode", isDarkMode);
   }
 
+  // Load favorites and settings upon opening
   Future<void> loadFavorites() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -63,6 +67,7 @@ class FavoritesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Set all favorites to false and save
   void clearFavorites() async {
     for(final city in cities) {
       city.isFavorite = false;
@@ -80,12 +85,14 @@ class FavoritesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Turn dark mode on and off
   void toggleDarkMode(bool value) {
     isDarkMode = !isDarkMode;
     saveFavorites();
     notifyListeners();
   }
 
+  // Update city favorite state
   void toggleCityFavorite(int cityId) {
     final city = cities.firstWhere((city) => city.id == cityId);
     city.isFavorite = !city.isFavorite;
@@ -93,6 +100,7 @@ class FavoritesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Update hobby favorite state
   void toggleHobbyFavorite(int hobbyId) {
     final hobby = hobbies.firstWhere((hobby) => hobby.id == hobbyId);
     hobby.isFavorite = !hobby.isFavorite;
@@ -100,6 +108,7 @@ class FavoritesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Update book favorite state
   void toggleBookFavorite(int bookId) {
     final book = books.firstWhere((book) => book.id == bookId);
     book.isFavorite = !book.isFavorite;

@@ -28,6 +28,7 @@ class _FavoritesCardState extends State<FavoritesCard> {
     final favoritesProvider = Provider.of<FavoritesProvider>(context);
     final List categoryList;
 
+    // Determine which list is being called
     switch(widget.category) {
       case ContentCategory.cities:
         categoryList = favoritesProvider.cities;
@@ -37,13 +38,18 @@ class _FavoritesCardState extends State<FavoritesCard> {
         categoryList = favoritesProvider.books;
     }
 
+    // Generate list of favorites to display
     final favoritesList = categoryList.where((item) => item.isFavorite).toList();
 
     return FavoritesExpansionTile(
       title: Text(widget.title),
       childrenPadding: EdgeInsets.only(top: 16, bottom: 16),
-      children: [ favoritesList.isEmpty ? 
-        Row (
+      children: [ 
+        // Determine if the favorites list is empty
+        // If list is empty display a widget that says favorites need to be added
+        // If list is not empty, display list of favorites
+        favoritesList.isEmpty
+        ? Row (
           mainAxisSize: MainAxisSize.min, 
           children: [
             Text(
@@ -53,20 +59,20 @@ class _FavoritesCardState extends State<FavoritesCard> {
               ),
             ),
           ],
-        ) : 
-        ListView.builder(
+        )
+        : ListView.builder(
           shrinkWrap: true,
+          // Favorites page already scrolls so need to turn off scroll within this list view
           physics: NeverScrollableScrollPhysics(),
           itemCount: favoritesList.length,
           itemBuilder: (context, index) {
             final item = favoritesList[index];
+            // Determine which card to generate based on category
             switch(widget.category) {
               case ContentCategory.cities:
                 return CityCard(city: item);
-
               case ContentCategory.hobbies:
                 return HobbyCard(hobby: item);
-
               case ContentCategory.books:
                 return BookCard(book: item);
             }
