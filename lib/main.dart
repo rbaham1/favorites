@@ -18,10 +18,12 @@ class FavoritesApp extends StatelessWidget {
         builder: (context, favoritesProvider, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
+            // Light theme data
             theme: ThemeData(
               brightness: Brightness.light,
               scaffoldBackgroundColor: Colors.white
             ),
+            // Dark theme data
             darkTheme: ThemeData(
               brightness: Brightness.dark,
               scaffoldBackgroundColor: Colors.black,

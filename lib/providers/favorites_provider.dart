@@ -42,7 +42,7 @@ class FavoritesProvider extends ChangeNotifier {
       await prefs.setBool("darkMode", isDarkMode);
   }
 
-  // Load favorites and settings upon opening
+  // Load saved favorites and settings
   Future<void> loadFavorites() async {
     final prefs = await SharedPreferences.getInstance();
 

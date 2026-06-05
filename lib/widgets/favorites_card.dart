@@ -39,7 +39,9 @@ class _FavoritesCardState extends State<FavoritesCard> {
     }
 
     // Generate list of favorites to display
-    final favoritesList = categoryList.where((item) => item.isFavorite).toList();
+    final favoritesList = categoryList
+      .where((item) => item.isFavorite)
+      .toList();
 
     return FavoritesExpansionTile(
       title: Text(widget.title),
@@ -49,35 +51,35 @@ class _FavoritesCardState extends State<FavoritesCard> {
         // If list is empty display a widget that says favorites need to be added
         // If list is not empty, display list of favorites
         favoritesList.isEmpty
-        ? Row (
-          mainAxisSize: MainAxisSize.min, 
-          children: [
-            Text(
-              "Go to the browse tab to add favorites!",
-              style: TextStyle(
-                fontSize: 14
+          ? Row (
+            mainAxisSize: MainAxisSize.min, 
+            children: [
+              Text(
+                "Go to the browse tab to add favorites!",
+                style: TextStyle(
+                  fontSize: 14
+                ),
               ),
-            ),
-          ],
-        )
-        : ListView.builder(
-          shrinkWrap: true,
-          // Favorites page already scrolls so need to turn off scroll within this list view
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: favoritesList.length,
-          itemBuilder: (context, index) {
-            final item = favoritesList[index];
-            // Determine which card to generate based on category
-            switch(widget.category) {
-              case ContentCategory.cities:
-                return CityCard(city: item);
-              case ContentCategory.hobbies:
-                return HobbyCard(hobby: item);
-              case ContentCategory.books:
-                return BookCard(book: item);
+            ],
+          )
+          : ListView.builder(
+            shrinkWrap: true,
+            // Favorites page already scrolls so need to turn off scroll within this list view
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: favoritesList.length,
+            itemBuilder: (context, index) {
+              final item = favoritesList[index];
+              // Determine which card to generate based on category
+              switch(widget.category) {
+                case ContentCategory.cities:
+                  return CityCard(city: item);
+                case ContentCategory.hobbies:
+                  return HobbyCard(hobby: item);
+                case ContentCategory.books:
+                  return BookCard(book: item);
+              }
             }
-          }
-        ),
+          ),
       ]
     );
   }

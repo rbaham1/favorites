@@ -9,33 +9,26 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 70,
-      margin: EdgeInsets.all(0),
       child: ListTile(
         // Display book title and display author underneath in subtitle format
         title: Text(book.bookTitle),
         subtitle: Text(book.bookAuthor),
         // Add favorite button
-        trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                onPressed: () {
-                  context.read<FavoritesProvider>()
-                  .toggleBookFavorite(book.id);
-                }, 
-                icon: Icon(
-                  book.isFavorite ? 
-                  Icons.favorite : 
-                  Icons.favorite_border,
-                  color: book.isFavorite ? Colors.red : Theme.of(context).unselectedWidgetColor,
-                )
-              )
-            ],
+        trailing: IconButton(
+          onPressed: () {
+            context.read<FavoritesProvider>().toggleBookFavorite(book.id);
+          },
+          icon: Icon(
+            book.isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: book.isFavorite
+              ? Colors.red
+              : Theme.of(context).unselectedWidgetColor,
           ),
-          contentPadding: EdgeInsets.only(left: 12, right: 12),
         ),
+        contentPadding: EdgeInsets.only(left: 12, right: 12),
+      ),
     );
   }
 }

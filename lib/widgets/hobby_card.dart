@@ -14,6 +14,7 @@ class HobbyCard extends StatelessWidget {
       margin: EdgeInsets.all(12),
       child: Row(
         children: [
+          // Display hobby name and icon
           Expanded(child: 
             Row(
               children: [
@@ -25,16 +26,16 @@ class HobbyCard extends StatelessWidget {
               ],
             )
           ),
+          // Favorite button
           IconButton(
             onPressed: () {
-              context.read<FavoritesProvider>()
-              .toggleHobbyFavorite(hobby.id);
+              context.read<FavoritesProvider>().toggleHobbyFavorite(hobby.id);
             }, 
             icon: Icon(
-              hobby.isFavorite ? 
-              Icons.favorite : 
-              Icons.favorite_border,
-              color: hobby.isFavorite ? Colors.red : Theme.of(context).unselectedWidgetColor,
+              hobby.isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: hobby.isFavorite
+                ? Colors.red
+                : Theme.of(context).unselectedWidgetColor,
             )
           )
         ],

@@ -16,9 +16,7 @@ class CityCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            child: Image.asset(
-              "assets/images/${city.cityImage}.jpeg"
-            )
+            child: Image.asset("assets/images/${city.cityImage}.jpeg"),
           ),
           Positioned(
             top: 5,
@@ -27,28 +25,23 @@ class CityCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(city.cityName,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18
-                  )
+                Text(
+                  city.cityName,
+                  style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 // Add favorites button
                 IconButton(
                   onPressed: () {
-                    context.read<FavoritesProvider>().
-                    toggleCityFavorite(city.id);
-                  }, 
+                    context.read<FavoritesProvider>().toggleCityFavorite(city.id);
+                  },
                   icon: Icon(
-                    city.isFavorite ? 
-                    Icons.favorite : 
-                    Icons.favorite_border,
+                    city.isFavorite ? Icons.favorite : Icons.favorite_border,
                     color: city.isFavorite ? Colors.red : Colors.black45,
-                  )
-                )
+                  ),
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
